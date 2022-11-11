@@ -58,8 +58,8 @@ import { gql } from '@apollo/client';
           bookId
           authors
           description
-          title
           description
+          title
           image
           link
         }
@@ -74,10 +74,10 @@ import { gql } from '@apollo/client';
         username
         email
         savedBooks {
+          bookId
           authors
           description
           title
-          bookId
           image
           link
         }
