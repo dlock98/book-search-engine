@@ -38,8 +38,8 @@ const { AuthenticationError } = require('apollo-server-express');
        return { token, user };
      },
      saveBook: async (parent, { newBook }, context) => {
-        console.log("CONTEXTSAVEBOOK", context);
-       if (context.user) {
+        console.log("CONTEXTSAVEBOOK", context);       
+        if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
             { _id: context.user._id },
            { $push: { savedBooks: newBook }},

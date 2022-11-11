@@ -11,7 +11,7 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [loginUser, { error }] = useMutation(LOGIN_USER);
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   useEffect(() => {
     if (error) {
@@ -38,7 +38,7 @@ const LoginForm = () => {
 
     try {
       console.log("TRYBLOCKLOGIN");
-      const response = await loginUser({variables: {...userFormData}});
+      const response = await login({variables: {...userFormData}});      
       console.log("RESPONSE", response);
       if (!response) {
         throw new Error('something went wrong!');
