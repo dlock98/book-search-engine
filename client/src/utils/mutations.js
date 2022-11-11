@@ -55,10 +55,11 @@ import { gql } from '@apollo/client';
         username
         email
         savedBooks {
+          bookId
           authors
           description
           title
-          bookId
+          description
           image
           link
         }
