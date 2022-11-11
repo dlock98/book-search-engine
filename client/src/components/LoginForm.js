@@ -19,7 +19,7 @@ const LoginForm = () => {
     } else {
       setShowAlert(false);
     }
-  });
+  }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,18 +37,15 @@ const LoginForm = () => {
     }
 
     try {
-      console.log("TRYBLOCKLOGIN");
-      const response = await login({variables: {...userFormData}});      
-      console.log("RESPONSE", response);
-      if (!response) {
-        throw new Error('something went wrong!');
-      }
+      const { data } = await login({
+        variables: { ...userFormData }
+      });
 
-      Auth.login(response.data.login.token);
-      console.log("AUTH.LOGIN", response.data.login.token);
+      Auth.login(data.login.token);
+
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
+   //   setShowAlert(true);
     }
 
     setUserFormData({
