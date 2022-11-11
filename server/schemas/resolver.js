@@ -37,27 +37,21 @@ const { AuthenticationError } = require('apollo-server-express');
      },
      saveBook: async (parent, { newBook }, context) => {
        if (context.user) {
-         return Thought.findOneAndUpdate(
-           { _id: thoughtId },
-           {
-             $addToSet: {
-               comments: { commentText, commentAuthor: context.user.username },
-             },
-           },
-           {
-             new: true,
-             runValidators: true,
-           }
-         );
-       }
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: context.user._id },
+           { $addToSet: { savedBooks: newBook }},
+           { new: true }
+        );
+       return updatedUser;
+        };
        throw new AuthenticationError('You need to be logged in!');
      },
      removeBook: async (parent, { bookId }, context) => {
        if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
-            {_id: context.user._id },
+            { _id: context.user._id },
             { $pull: { savedBooks: { bookId }}},
-            { new: true}
+            { new: true }
          );
        }
        throw new AuthenticationError('You need to be logged in!');
