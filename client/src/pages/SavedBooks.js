@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -9,9 +9,8 @@ import { REMOVE_BOOK } from '../utils/mutations';
 const SavedBooks = () => {
 
   const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me || {};
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
-
+  const userData = data?.me || {};
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
